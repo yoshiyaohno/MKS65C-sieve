@@ -29,9 +29,13 @@ int sieve( int n )
 
     // printf("PRE-SIEV\tn is %d\n", n);
 
+    int prime = 0;
+
     int size_sqrt = sqrt(size);
     while( tracer < size_sqrt ) {
         while( jeff[++tracer] );
+        n--;
+        prime = tracer;
         // printf("TRACER: %d\n", tracer);
         p = jeff + tracer;
         while( (p += (2*tracer+1)) < jeff + size )
@@ -39,10 +43,9 @@ int sieve( int n )
         // printf("IN-SIEV\tn is %d\n", n);
     }
 
-    tracer = 0;
     while(n--)
-        while( jeff[ ++tracer] );
-    return 2*tracer+1;
+        while( jeff[ ++prime] );
+    return 2*prime+1;
 }
 
 // int main()
