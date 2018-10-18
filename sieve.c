@@ -15,6 +15,9 @@
 
 int sieve( int n )
 {
+    if(n==0) return 2;
+    if(n==1) return 3;
+
     int size;
     if( n < 5000 )
         size = (1.3 * n * log(n) + 10) / 2;
