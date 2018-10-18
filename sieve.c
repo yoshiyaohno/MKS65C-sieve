@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "sieve.h"
 
 //// SOME OPTIMIZATIONS ////
 //
@@ -44,10 +45,10 @@ int sieve( int n )
     return 2*tracer+1;
 }
 
-int main()
-{
-    int n;
-    for( n = 1000000; n < 1000011; ++n )
-        printf("n=%d: %d\n", n, sieve(n) );
-    return 0;
-}
+// int main()
+// {
+//     int n;
+//     for( n = 1000000; n < 1000011; ++n )
+//         printf("n=%d: %d\n", n, sieve(n) );
+//     return 0;
+// }
