@@ -21,6 +21,8 @@ int main(int argc, char * argv[]) {
         //this is to modify which prime to
         //potentially avoid CPU caching
         target++;
+
+        // target += 1000;
     }
     return 0;
 }
