@@ -16,10 +16,10 @@
 int sieve( int n )
 {
     int size;
-    if( n < 5000 )
+    if( n < 7000 )
         size = (1.3 * n * log(n) + 10) / 2;
     else
-        size = 1.15 * n * log(n) / 2;
+        size = 1.105 * n * log(n) / 2;
 
     // printf("\t\tSIZE %d\n", size);
     char *jeff = calloc( size, 1);
