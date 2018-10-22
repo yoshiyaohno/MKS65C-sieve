@@ -11,7 +11,7 @@ run :
 	./sieve $(args)
 
 clean :
-	rm sieve *.o
+	rm a.out sieve sieve_debug *.o
 
 debug :
 	gcc -g -c sieve.c -lm
