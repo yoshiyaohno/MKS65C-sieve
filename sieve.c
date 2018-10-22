@@ -18,10 +18,8 @@ int sieve( int n )
     int size;
     if( n < 5000 )
         size = (1.3 * n * log(n) + 10) / 2;
-    else if( n < 45000 )
-        size = 1.15 * n * log(n) / 2;
     else
-        size = 1.07 * n * log(n) / 2;
+        size = 1.15 * n * log(n) / 2;
 
     // printf("\t\tSIZE %d\n", size);
     char *jeff = calloc( size, 1);
@@ -37,14 +35,14 @@ int sieve( int n )
         n--;
         // printf("TRACER: %d\n", tracer);
         p = jeff + tracer;
-        while( (p += (2*tracer+1)) < jeff + size )
+        while( (p += 2*tracer+3) < jeff + size )
             *p = 1;
         // printf("IN-SIEV\tn is %d\n", n);
     }
 
-    while(n--)
+    while(--n)
         while( jeff[ ++tracer] );
-    return 2*tracer+1;
+    return 2*tracer+3;
 }
 
 // int main()
