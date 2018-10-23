@@ -3,6 +3,8 @@
 #include <math.h>
 #include "sieve.h"
 
+//////// THIS ONE IS NOT BITWISE ////////
+
 //// SOME OPTIMIZATIONS ////
 //
 //    still to do
