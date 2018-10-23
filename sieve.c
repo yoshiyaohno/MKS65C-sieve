@@ -24,24 +24,24 @@ int sieve( int n )
     // printf("\t\tSIZE %d\n", size);
     char *jeff = calloc( size, 1);
 
-    int peff;
+    char *p;
     int tracer = 0;
 
     // printf("PRE-SIEV\tn is %d\n", n);
 
-    int size_sqrt = sqrt(size * 8);
+    int size_sqrt = sqrt(size);
     while( tracer < size_sqrt ) {
-        while( jeff[(++tracer)/8] & 1<<(tracer%8) );
+        while( jeff[++tracer] );
         n--;
         // printf("TRACER: %d\n", tracer);
-        peff = tracer;
-        while( (peff += 2*tracer+1) < size * 8 )
-            jeff[ peff/8 ] |= 1<<(peff%8);
+        p = jeff + tracer;
+        while( (p += 2*tracer+1) < jeff + size )
+            *p = 1;
         // printf("IN-SIEV\tn is %d\n", n);
     }
 
     while(--n)
-        while( jeff[ (++tracer)/8] & 1<<(tracer%8) );
+        while( jeff[ ++tracer] );
     return 2*tracer+1;
 }
 
