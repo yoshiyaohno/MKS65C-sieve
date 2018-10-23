@@ -35,14 +35,14 @@ int sieve( int n )
         n--;
         // printf("TRACER: %d\n", tracer);
         p = jeff + tracer;
-        while( (p += 2*tracer+3) < jeff + size )
+        while( (p += 2*tracer+1) < jeff + size )
             *p = 1;
         // printf("IN-SIEV\tn is %d\n", n);
     }
 
     while(--n)
         while( jeff[ ++tracer] );
-    return 2*tracer+3;
+    return 2*tracer+1;
 }
 
 // int main()
