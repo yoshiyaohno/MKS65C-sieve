@@ -3,15 +3,15 @@
 #include <math.h>
 #include "sieve.h"
 
-//////// THIS ONE IS BITWISE ////////
+//////// BITWISE ////////
 
 //// SOME OPTIMIZATIONS ////
 //
 //    still to do
-// 3. minimise writes, short circuit, etc
-// 4. b i t w i s e    o p e r a t i o n s
 // 5. see if you can find a way around calloc
 //      (multiple varaibles? lol)
+// 5.5? I guess make tracer a pointer, see if that helps
+// 6. W H E E L    T I M E 
 //
 //// SOME OPTIMIZATIONS ////
 
@@ -19,42 +19,31 @@ int sieve( int n )
 {
     int size;
     if( n < 5000 )
-        size = (1.3 * n * log(n) + 10) / 2;
+        size = (1.3 * n * log(n) + 10) / 16;
     else
-        size = 1.15 * n * log(n) / 2;
+        size = 1.15 * n * log(n) / 16;
 
     // printf("\t\tSIZE %d\n", size);
     char *jeff = calloc( size, 1);
 
-    char *p;
-    char p_offset = 0;
-    // int tracer = 0;
-    char *trace_ptr = jeff;
-    char trace_offset = 0;
-
+    int peff;
+    int tracer = 0;
 
     // printf("PRE-SIEV\tn is %d\n", n);
 
     int size_sqrt = sqrt(size * 8);
     while( tracer < size_sqrt ) {
-        while( jeff[(++tracer) >> 3] & 1<<(tracer & 0b111) );
+        while( jeff[(++tracer)/8] & 1<<(tracer%8) );
         n--;
         // printf("TRACER: %d\n", tracer);
-        p = jeff + (tracer>>3);
-        offset = tracer & 0b111;
-        while( (p += (2*tracer+1)>>3) < size * 8 ) {
-            offset += (tracer & 0b111);
-            if( offset > 7 ) {
-                offset -= 8;
-                ++p;
-            }
-            *p |= 1<<offset;
-        }
+        peff = tracer;
+        while( (peff += 2*tracer+1) < size * 8 )
+            jeff[ peff/8 ] |= 1<<(peff%8);
         // printf("IN-SIEV\tn is %d\n", n);
     }
 
     while(--n)
-        while( jeff[ (++tracer) >> 3] & 1<<(tracer & 0b111) );
+        while( jeff[ (++tracer)/8] & 1<<(tracer%8) );
     return 2*tracer+1;
 }
 
