@@ -17,3 +17,6 @@ debug :
 	gcc -g -c sieve.c -lm
 	gcc -g -c driver.c
 	gcc -g -o sieve_debug sieve.o driver.o -lm
+
+ddebug :
+	gdb sieve_debug
