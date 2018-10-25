@@ -33,9 +33,8 @@ int sieve( int n )
     int tracer = 1;
 
     int wheel[]   = {1, 7, 11, 13, 17, 19, 23, 29};
-    //int wheel[] = {1, 7, 11, 13, 17, 19, 23, 29};
-    int acc[]     = {6, 4, 2, 4, 2, 4, 6, 2};
-    char hrm = 0;
+    //int acc[]     = {6, 4, 2, 4, 2, 4, 6, 2};
+    //char hrm = 0;
     int w_trac = 0;
 
     // printf("PRE-SIEV\tn is %d\n", n);
