@@ -30,9 +30,10 @@ int sieve( int n )
     char *jeff = calloc( size/8, 1);
 
     int peff;
-    int tracer = 0;
+    int tracer = 1;
 
     int wheel[]   = {1, 7, 11, 13, 17, 19, 23, 29};
+    //int acc[]     = {3, 2, 1, 2, 1, 2, 3, 1};
     int acc[]     = {3, 2, 1, 2, 1, 2, 3, 1};
     int hrm = 0;
     int w_trac = 0;
@@ -53,7 +54,7 @@ int sieve( int n )
         peff = tracer;
 
         // DO 2 * n + 1   DO NOT FORGET OK OK OK 
-        while( (peff += tracer) <= size ) {
+        while( (peff += 2*tracer+1) < size ) {
             //printf("\t\tpeff %d\n", peff);
             jeff[ peff/8 ] |= 1<<(peff%8);
         }
@@ -62,11 +63,8 @@ int sieve( int n )
     while(--n)
         // while( jeff[(tracer = 30*(++w_trac/8) + wheel[w_trac%8])/8]
         //         & 1<<(tracer%8) );
-        while( jeff[(tracer += acc[hrm++])/8] & 1<<(tracer%8) ) {
-            if( n < 334000 )
-                printf("hrm %d\n", hrm);
+        while( jeff[(tracer += acc[hrm++])/8] & 1<<(tracer%8) )
             if( hrm >= 8 ) hrm = 0;
-        }
     return tracer;
 }
 
