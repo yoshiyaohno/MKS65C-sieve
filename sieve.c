@@ -30,7 +30,7 @@ int sieve( int n )
     char *jeff = calloc( size/8, 1);
 
     int peff;
-    int tracer = 1;
+    int tracer = 0;
 
     int wheel[]   = {1, 7, 11, 13, 17, 19, 23, 29};
     //int acc[]     = {3, 2, 1, 2, 1, 2, 3, 1};
@@ -47,8 +47,7 @@ int sieve( int n )
     while( tracer < size_sqrt ) {
         // while( jeff[(tracer = 30*(++w_trac/8) + wheel[w_trac%8])/8]
         //         & 1<<(tracer%8) );
-        while( jeff[(tracer += acc[hrm++])/8] & 1<<(tracer%8) )
-            if( hrm >= 8 ) hrm = 0;
+        while( jeff[(tracer += acc[hrm++%8])/8] & 1<<(tracer%8) );
         //printf("\ttracer p %d\n\n", tracer);
         n--;
         peff = tracer;
@@ -63,9 +62,8 @@ int sieve( int n )
     while(--n)
         // while( jeff[(tracer = 30*(++w_trac/8) + wheel[w_trac%8])/8]
         //         & 1<<(tracer%8) );
-        while( jeff[(tracer += acc[hrm++])/8] & 1<<(tracer%8) )
-            if( hrm >= 8 ) hrm = 0;
-    return tracer;
+        while( jeff[(tracer += acc[hrm++%8])/8] & 1<<(tracer%8) );
+    return 2*tracer+1;
 }
 
 // int main()
