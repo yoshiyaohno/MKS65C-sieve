@@ -19,37 +19,49 @@
 
 int sieve( int n )
 {
+    n -= 2;
     int size;
     if( n < 5000 )
-        size = (1.3 * n * log(n) + 10) / 2;
+        size = (1.3 * n * log(n) + 10);
     else
-        size = 1.15 * n * log(n) / 2;
+        size = 1.15 * n * log(n);
 
     // printf("\t\tSIZE %d\n", size);
     char *jeff = calloc( size/8, 1);
 
     int peff;
-    int tracer = 0;
+    int tracer = 1;
 
-    int wheel[] = {1, 7, 11, 13, 17, 19, 23, 29};
+    int wheel[]   = {1, 7, 11, 13, 17, 19, 23, 29};
+    //int wheel[] = {1, 7, 11, 13, 17, 19, 23, 29};
+    int acc[]     = {6, 4, 2, 4, 2, 4, 6, 2};
+    char hrm = 0;
+    int w_trac = 0;
 
     // printf("PRE-SIEV\tn is %d\n", n);
-    int real_gdp;
+
 
     int size_sqrt = sqrt(size);
+    //printf("\n\n\nSIZE %d SIZE\nSQRT %d SQRT\n\n", size, size_sqrt);
+    //printf("\ttracer a %d\n", tracer);
     while( tracer < size_sqrt ) {
-        while( jeff[(++tracer)/8] & 1<<(tracer%8) );
+        while( jeff[(tracer = 30*(++w_trac/8) + wheel[w_trac%8])/8]
+                & 1<<(tracer%8) );
+        //printf("\ttracer p %d\n\n", tracer);
         n--;
         peff = tracer;
 
-        real_gdp = 30*(tracer/8)+wheel[tracer%8];
-        while( (peff += real_gdp) < size )
+        // DO 2 * n + 1   DO NOT FORGET OK OK OK 
+        while( (peff += tracer) <= size ) {
+            //printf("\t\tpeff %d\n", peff);
             jeff[ peff/8 ] |= 1<<(peff%8);
+        }
     }
 
     while(--n)
-        while( jeff[ (++tracer)/8] & 1<<(tracer%8) );
-    return 30*(tracer/8)+wheel[tracer%8];
+        while( jeff[(tracer = 30*(++w_trac/8) + wheel[w_trac%8])/8]
+                & 1<<(tracer%8) );
+    return tracer;
 }
 
 // int main()
