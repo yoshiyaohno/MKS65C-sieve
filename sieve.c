@@ -12,9 +12,7 @@ int sieve( int n )
         size = (1.3 * n * log(n) + 10) / 2;
     else
         size = 1.15 * n * log(n) / 2;
-
     char *jeff = calloc( size/8, 1);
-
     unsigned int peff;
     unsigned int tracer = 0;
     char acc[] = {3, 2, 1, 2, 1, 2, 3, 1};
@@ -27,7 +25,6 @@ int sieve( int n )
         while( (peff += (tracer<<1)+1) < size )
             jeff[ peff>>3 ] |= 1<<(peff&0b111);
     }
-
     while(--n)
         while( jeff[(tracer += acc[hrm++ & 0b111])>>3] & 1<<(tracer&0b111) );
     return (tracer<<1)+1;
