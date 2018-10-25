@@ -19,6 +19,7 @@
 
 int sieve( int n )
 {
+    n -= 2;
     int size;
     if( n < 5000 )
         size = (1.3 * n * log(n) + 10) / 2;
@@ -32,27 +33,28 @@ int sieve( int n )
     int tracer = 0;
 
     int wheel[]   = {1, 7, 11, 13, 17, 19, 23, 29};
-    //int wheel[] = {1, 7, 11, 13, 17, 19, 23, 29};
-    int acc[]     = {6, 4, 2, 4, 2, 4, 6, 2};
-    char hrm = 0;
+    int acc[]     = {3, 2, 1, 2, 1, 2, 3, 1};
+    int hrm = 0;
     int w_trac = 0;
 
     // printf("PRE-SIEV\tn is %d\n", n);
 
 
     int size_sqrt = sqrt(size);
+    //printf("\n\n\nSIZE %d SIZE\nSQRT %d SQRT\n\n", size, size_sqrt);
+    //printf("\ttracer a %d\n", tracer);
     while( tracer < size_sqrt ) {
         // while( jeff[(tracer = 30*(++w_trac/8) + wheel[w_trac%8])/8]
         //         & 1<<(tracer%8) );
-        while( jeff[ (tracer += acc[hrm]) / 8 ] & 1<<(tracer%8)) {
-            if(hrm >= 8) hrm = 0;
-            printf("looking hrm %d\n", hrm);
-        }
+        while( jeff[(tracer += acc[hrm++])/8] & 1<<(tracer%8) )
+            if( hrm >= 8 ) hrm = 0;
+        //printf("\ttracer p %d\n\n", tracer);
         n--;
         peff = tracer;
 
         // DO 2 * n + 1   DO NOT FORGET OK OK OK 
-        while( (peff += tracer) < size ) {
+        while( (peff += tracer) <= size ) {
+            //printf("\t\tpeff %d\n", peff);
             jeff[ peff/8 ] |= 1<<(peff%8);
         }
     }
@@ -60,8 +62,11 @@ int sieve( int n )
     while(--n)
         // while( jeff[(tracer = 30*(++w_trac/8) + wheel[w_trac%8])/8]
         //         & 1<<(tracer%8) );
-        while( jeff[ (tracer += acc[hrm++]) /8 ] & 1<<(tracer%8))
+        while( jeff[(tracer += acc[hrm++])/8] & 1<<(tracer%8) ) {
+            if( n < 334000 )
+                printf("hrm %d\n", hrm);
             if( hrm >= 8 ) hrm = 0;
+        }
     return tracer;
 }
 
